@@ -1,7 +1,7 @@
 import React, {useState, useCallback} from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import DocumentPicker from 'react-native-document-picker';
+import * as DocumentPicker from 'expo-document-picker';
 
 const FileSendIcon = ({size, iconstyles}) => {
   const [singleFile, setSingleFile] = useState('');
@@ -10,11 +10,7 @@ const FileSendIcon = ({size, iconstyles}) => {
   const selectOneFile = useCallback(async () => {
     //Opening Document Picker for selection of one file
     try {
-      const res = await DocumentPicker.pick({
-        presentationStyle: 'fullScreen',
-        type: [DocumentPicker.types.allFiles],
-        allowMultiSelection: true
-      });
+      const res = await DocumentPicker.getDocumentAsync({});
       //Printing the log realted to the file
       console.log('res : ' + JSON.stringify(res));
       console.log('URI : ' + res.uri);
